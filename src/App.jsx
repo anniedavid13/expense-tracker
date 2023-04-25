@@ -5,6 +5,9 @@ import {
 import Dashboard, { dashboardLoader } from "./pages/Dashboard";
 import Main, { mainLoader } from "./layouts/Main";
 import { logoutAction } from "./actions/logout";
+import { ToastContainer } from "react-toastify";
+import Error from "./pages/Error";
+import "react-toastify/dist/ReactToastify.css";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +33,7 @@ function App() {
 
       <div className='App'>
         <RouterProvider router={router} />
-        
+        <ToastContainer />
     </div>
   )
 }
