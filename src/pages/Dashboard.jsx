@@ -7,8 +7,10 @@ import { toast } from "react-toastify";
 // components
 import Intro from "../components/Intro";
 import AddBudgetForm from "../components/AddBudgetForm";
+
 //  helper functions
-import { createBudget, fetchData, waait } from "../helpers"
+import { createBudget, fetchData, waait, createExpense } from "../helpers"
+import AddExpenseForm from "../components/AddExpenseForm";
 
 // loader
 export function dashboardLoader() {
@@ -19,9 +21,12 @@ export function dashboardLoader() {
 
 // action
 export async function dashboardAction({ request }) {
-  await waait()
+  await waait();
+
   const data = await request.formData();
-  const {_action, ...values} = Object.fromEntries(data)
+  const { _action, ...values } = Object.fromEntries(data)
+
+  // new user submission
   if (_action === "newUser") {
     try {
       localStorage.setItem("userName", JSON.stringify(values.userName))
@@ -30,6 +35,7 @@ export async function dashboardAction({ request }) {
       throw new Error("There was a problem creating your account.")
     }
   }
+
   if (_action === "createBudget") {
     try {
       createBudget({
@@ -41,7 +47,18 @@ export async function dashboardAction({ request }) {
       throw new Error("There was a problem creating your budget.")
     }
   }
-
+  if (_action === "createExpense") {
+    try {
+      createExpense({
+         name: values.newExpense,
+         amount: values.newExpenseAmount,
+          budgetId: values.newExpenseBudget
+      })
+      return toast.success(`Expense ${values.newExpense} added!`)
+    } catch (e) {
+      throw new Error("There was a problem creating your expense.")
+    }
+  }
 }
 
 const Dashboard = () => {
@@ -52,13 +69,21 @@ const Dashboard = () => {
       {userName ? (
         <div className="dashboard">
           <h1>Welcome back, <span className="accent">{userName}</span></h1>
-          <div className="grid-sm">
-            {/* {budgets ? () : ()} */}
+            <div className="grid-sm">
+            {budgets && budgets.length > 0 ? (
             <div className="grid-lg">
               <div className="flex-lg">
                 <AddBudgetForm />
+                <AddExpenseForm budgets={budgets} />
               </div>
-            </div>
+            </div> ) : (
+              <div className="grid-sm">
+                <p>Find your financial freedom!</p>
+                <p>Create a budget to get started!</p>
+                <AddBudgetForm /> 
+              </div>
+            )
+            }
           </div>
         </div>
       ) : <Intro />}
