@@ -30,12 +30,12 @@ svg {
   --lh-1-4: 1.4;
 
   /* colors */
-  --accent: 183 74% 44%;
+  --accent:  0 100% 79%;
   --bkg: 190 60% 98%;
   --text: 185 26% 9%;
-  --muted: 183 8% 55%;
+  --muted: 0 53% 93%;
   --light: 180 14% 85%;
-  --warning: 4 66% 63%;
+  --warning: 348 100% 31%;
 
   /* utils */
   --space-xs: 8px;
