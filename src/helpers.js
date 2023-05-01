@@ -1,4 +1,4 @@
-export const waait = () => new Promise(res => setTimeout(res, Math.random() * 2000))
+export const waait = () => new Promise(res => setTimeout(res, Math.random() * 800))
 
 
 // colors
@@ -82,3 +82,7 @@ export const formatPercent = (amt) => {
   })
 }
 
+//format date 
+export const formatDateToLocaleString = (epoch) => (
+  new Date(epoch).toLocaleString()
+)
