@@ -1,49 +1,67 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Dashboard, { dashboardLoader, dashboardAction } from "./pages/Dashboard";
-import Main, { mainLoader } from "./layouts/Main";
-import { logoutAction } from "./actions/logout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// Library
 import { ToastContainer } from "react-toastify";
-import Error from "./pages/Error";
 import "react-toastify/dist/ReactToastify.css";
-import ExpensesPage, { expensesAction, expensesLoader } from "./pages/ExpensesPage";
+
+// Layouts
+import Main, { mainLoader } from "./layouts/Main";
+
+// Actions
+import { logoutAction } from "./actions/logout";
+
+// Routes
+import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
+import Error from "./pages/Error";
+import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
+import ExpensesPage, {
+  expensesAction,
+  expensesLoader,
+} from "./pages/ExpensesPage";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Main/>,
+    element: <Main />,
     loader: mainLoader,
     errorElement: <Error />,
     children: [
-      { 
+      {
         index: true,
-        element:<Dashboard />,
+        element: <Dashboard />,
         loader: dashboardLoader,
+        action: dashboardAction,
         errorElement: <Error />,
-        action: dashboardAction
+      },
+      {
+        path: "budget/:id",
+        element: <BudgetPage />,
+        loader: budgetLoader,
+        action: budgetAction,
+        errorElement: <Error />,
       },
       {
         path: "expenses",
-        element:<ExpensesPage />,
+        element: <ExpensesPage />,
         loader: expensesLoader,
-        action: expensesAction
-      },{
+        action: expensesAction,
+        errorElement: <Error />,
+      },
+      {
         path: "logout",
-        action: logoutAction
-      }
-    ]
+        action: logoutAction,
+      },
+    ],
   },
-
 ]);
-function App() {
-    return (
 
-      <div className='App'>
-        <RouterProvider router={router} />
-        <ToastContainer />
+function App() {
+  return (
+    <div className="App">
+      <RouterProvider router={router} />
+      <ToastContainer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
