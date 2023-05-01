@@ -30,12 +30,12 @@ svg {
   --lh-1-4: 1.4;
 
   /* colors */
-  --accent: 0 100% 79%;
+  --accent: 183 74% 44%;
   --bkg: 190 60% 98%;
   --text: 185 26% 9%;
-  --muted: 359 45% 57%;
-  --light: 4 100% 94%;
-  --warning: 348 100% 31%;
+  --muted: 183 8% 55%;
+  --light: 180 14% 85%;
+  --warning: 4 66% 63%;
 
   /* utils */
   --space-xs: 8px;
@@ -410,13 +410,6 @@ select {
   place-items: start;
   width: 100%;
 }
-.text-gradient{
-    background: linear-gradient(to right, #FFD662, #F87E7B);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 
 /* form */
 .form-wrapper {
@@ -454,11 +447,7 @@ select {
   display: flex;
   gap: var(--space-md);
 }
-.piggybank{
-  float: right;
-  align-items: end;
-  justify-content: end;
-}
+
 @media screen and (max-width: 725px) {
   .expense-inputs {
     -ms-flex-wrap: wrap;
@@ -608,7 +597,9 @@ table a {
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--round-full);
 }
-
+.btn1{
+  color: white;
+}
 /* toast */
 .Toastify__toast-body {
   font-size: var(--fs-300);
